@@ -1,9 +1,14 @@
 ﻿function Connect-ExchangeOnline {
 
     [CmdletBinding()]
-    param(        
+    param(
+
+        [Parameter(
+            Mandatory = $true,
+            HelpMessage = 'Credentials in Azure AD to access Office 365.'
+        )]
         [System.Management.Automation.Credential()]
-        [pscredential]$Credential = [pscredential]::Empty  
+        [pscredential]$Credential
     )
 
     if ($null -ne (Get-ExchangeOnlineSession)) {

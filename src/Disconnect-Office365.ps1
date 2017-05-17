@@ -124,6 +124,6 @@
     end {
 
         # If the saved credentials variables for some reason is not removed we remove them again.
-        Set-Variable -Name AzureADCredentials -Scope Script -Value $null -ErrorAction SilentlyContinue
+        Remove-Variable -Name Credential -ErrorAction SilentlyContinue
     }
 }

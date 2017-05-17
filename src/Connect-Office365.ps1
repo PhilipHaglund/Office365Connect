@@ -123,59 +123,64 @@
         # Sorting all input strings from the Service parameter.
         if (($Service = $Service | Sort-Object -Unique).Count -gt 6 -or $Service -eq 'All') {
             $Service = 'AllServices'
-        }        
+        }
+        
+        if ($PSCmdlet.ShouldProcess('UserPrincipalName in Azure AD to access Office 365', 'Get-AzureADCredential')) {
+
+            $Credential = Get-AzureADCredential
+
+            if ($Credential -eq $false) {
+
+                Write-Warning -Message 'Need valid credentials to connect, please provide the correct credentials.'
+                exit
+            }    
+        }
     }
     process {
 
         foreach ($s in $Service) {
-
+            $Credential.GetNetworkCredential()
             if ($PSCmdlet.ShouldProcess('Establishing a PowerShell session to {0} - Office 365.' -f ('{0}' -f $s), $MyInvocation.MyCommand.Name)) {
-                $null = Get-AzureADCredential
-
-                if ($Script:AzureADCredentials -eq $false) {
-                        Write-Warning -Message 'Need valid credentials to connect, please provide the correct credentials.'
-                        break
-                }
-
+                
                 switch ($s) {
 
                     'AzureAD' {
                         Write-Verbose -Message 'Conncting to AzureAD.' -Verbose
-                        Connect-AzureADOnline
+                        Connect-AzureADOnline -Credential $Credential
                     }
                     'MSOnline' {
                         Write-Verbose -Message 'Conncting to MSolService.' -Verbose
-                        Connect-MsolServiceOnline
+                        Connect-MsolServiceOnline -Credential $Credential
                     }
                     'ComplianceCenter' {
                         Write-Verbose -Message 'Conncting to Compliance Center.' -Verbose
-                        Connect-CCOnline
+                        Connect-CCOnline -Credential $Credential
                     }
                     'ExchangeOnline' {
                         Write-Verbose -Message 'Conncting to Exchange Online.' -Verbose
-                        Connect-ExchangeOnline
+                        Connect-ExchangeOnline -Credential $Credential
                     }
                     'ExchangeOnlineProtection' {
                         Write-Verbose -Message 'Conncting to Exchange Online Protection.' -Verbose
-                        Connect-ExchangeOnlineProt
+                        Connect-ExchangeOnlineProt -Credential $Credential
                     }
                     'SharepointOnline' {
                         Write-Verbose -Message 'Conncting to Sharepoint Online.' -Verbose
-                        Connect-SPOnline -SharepointDomain $PSBoundParameters['SharepointDomain']
+                        Connect-SPOnline -SharepointDomain $PSBoundParameters['SharepointDomain'] -Credential $Credential
                     }
                     'SkypeforBusinessOnline' {
                         Write-Verbose -Message 'Conncting to Skype for Business Online.' -Verbose
-                        Connect-SfBOnline
+                        Connect-SfBOnline -Credential $Credential
                     }
                     Default {
                         Write-Verbose -Message 'Connecting to all Office 365 Services.' -Verbose
-                        Connect-AzureADOnline
-                        Connect-MsolServiceOnline
-                        Connect-CCOnline
-                        Connect-ExchangeOnline
-                        Connect-ExchangeOnlineProt
-                        Connect-SPOnline -SharepointDomain $PSBoundParameters['SharepointDomain']
-                        Connect-SfBOnline
+                        Connect-AzureADOnline -Credential $Credential
+                        Connect-MsolServiceOnline -Credential $Credential
+                        Connect-CCOnline -Credential $Credential
+                        Connect-ExchangeOnline -Credential $Credential
+                        Connect-ExchangeOnlineProt -Credential $Credential
+                        Connect-SPOnline -SharepointDomain $PSBoundParameters['SharepointDomain'] -Credential $Credential
+                        Connect-SfBOnline -Credential $Credential
                     }
                 }
             }
@@ -183,6 +188,6 @@
     }
     end {
 
-        Set-Variable -Name AzureADCredentials -Scope Script -Value $null -ErrorAction SilentlyContinue
+        Remove-Variable -Name Credential -ErrorAction SilentlyContinue
     }
 }

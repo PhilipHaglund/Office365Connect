@@ -9,8 +9,12 @@
         [Alias('Domain','DomainHost','Customer')]
         [string]$SharepointDomain,
 
+        [Parameter(
+            Mandatory = $true,
+            HelpMessage = 'Credentials in Azure AD to access Office 365.'
+        )]
         [System.Management.Automation.Credential()]
-        [pscredential]$Credential = [pscredential]::Empty
+        [pscredential]$Credential
     )
 
     $Module = Get-Module -Name 'Microsoft.Online.SharePoint.PowerShell' -ListAvailable
