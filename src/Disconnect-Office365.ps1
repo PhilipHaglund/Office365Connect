@@ -9,6 +9,7 @@
         MsolService requraes a seprate module - http://go.microsoft.com/fwlink/?linkid=236297
         Sharepoint Online requires a separate module - https://www.microsoft.com/en-us/download/details.aspx?id=35588
         Skype for Business Online requires a separate module - https://www.microsoft.com/en-us/download/details.aspx?id=39366
+        Exchange Online, Exchange Online Protection, Complince Center does not require seperate binaries.
 
         .EXAMPLE
         Disconnect-Office365
@@ -19,6 +20,7 @@
         VERBOSE: MsolService Module is now closed.
         VERBOSE: The Compliance Center Online PSSession is now closed.
         VERBOSE: The Exchange Online PSSession is now closed.
+        VERBOSE: The Exchange Online Protection PSSession is now closed.
         VERBOSE: The Sharepoint Online Session is now closed.
         VERBOSE: The Skype for Business Online PSSession is now closed.
 
@@ -29,10 +31,13 @@
 
 
         VERBOSE: Disconnecting from AzureAD.
+        VERBOSE: Azure AD Session is now closed.
         VERBOSE: Disconnecting from Compliance Center.
+        VERBOSE: The Compliance Center Online PSSession is now closed.
         VERBOSE: Disconnecting from Exchange Online.
+        VERBOSE: The Exchange Online PSSession is now closed.
 
-        This command disconnects from AzureAD, Compliance and Exchange Online service sessions that are available and running.
+        This command disconnects from AzureAD, Compliance Center and Exchange Online service sessions that are available and running.
 
         .NOTES
         Created on:     2017-02-23 14:56
@@ -51,17 +56,17 @@
     param(
         # Provide one or more Office 365 services to disconnect from.
         # Valid values are:
-        # 'AllServices', 'AzureAD', 'ComplianceCenter', 'ExchangeOnline', 'MSOnline', 'SharepointOnline', 'SkypeforBusinessOnline'
+        # 'AllServices', 'AzureAD', 'ComplianceCenter', 'ExchangeOnline', 'ExchangeOnlineProtection', 'MSOnline', 'SharepointOnline' ,'SkypeforBusinessOnline'
         [Parameter(
             ValueFromPipeline = $true            
         )]
-        [ValidateSet('AllServices', 'AzureAD', 'ComplianceCenter', 'ExchangeOnline', 'MSOnline', 'SharepointOnline' ,'SkypeforBusinessOnline')]
+        [ValidateSet('AllServices', 'AzureAD', 'ComplianceCenter', 'ExchangeOnline', 'ExchangeOnlineProtection', 'MSOnline', 'SharepointOnline' ,'SkypeforBusinessOnline')]
         [ValidateNotNullOrEmpty()]
         [string[]]$Service = @('AllServices')
     )
     begin {
 
-        if (($service = $Service | Sort-Object -Unique).Count -gt 5) {
+        if (($service = $Service | Sort-Object -Unique).Count -gt 6) {
             $Service = 'AllServices'
         }
     }
@@ -89,6 +94,10 @@
                         Write-Verbose -Message 'Disconnecting from Exchange Online.' -Verbose
                         Disconnect-ExchangeOnline
                     }
+                    'ExchangeOnlineProtection' {
+                        Write-Verbose -Message 'Disconnecting from Exchange Online Protection.' -Verbose
+                        Disconnect-ExchangeOnlineProt
+                    }
                     'SharepointOnline' {
                         Write-Verbose -Message 'Disconnecting from Sharepoint Online.' -Verbose
                         Disconnect-SPOnline
@@ -103,6 +112,7 @@
                         Disconnect-MsolServiceOnline
                         Disconnect-CCOnline
                         Disconnect-ExchangeOnline
+                        Disconnect-ExchangeOnlineProt
                         Disconnect-SPOnline
                         Disconnect-SfBOnline
                     }

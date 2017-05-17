@@ -9,6 +9,7 @@
         MsolService requires a separate module - http://go.microsoft.com/fwlink/?linkid=236297
         Sharepoint Online requires a separate module - https://www.microsoft.com/en-us/download/details.aspx?id=35588
         Skype for Business Online requires a separate module - https://www.microsoft.com/en-us/download/details.aspx?id=39366
+        Exchange Online, Exchange Online Protection, Complince Center does not require seperate binaries.
 
         DYNAMIC PARAMETERS
         -SharepointDomain <String>
@@ -78,12 +79,12 @@
     param(
         # Provide one or more Office 365 services to connect to.
         # Valid values are:
-        # 'AllServices', 'AzureAD', 'ComplianceCenter', 'ExchangeOnline', 'MSOnline', 'SharepointOnline' ,'SkypeforBusinessOnline'
+        # 'AllServices', 'AzureAD', 'ComplianceCenter', 'ExchangeOnline', 'ExchangeOnlineProtection', 'MSOnline', 'SharepointOnline' ,'SkypeforBusinessOnline'
         [Parameter(
             ValueFromPipeline = $true,
             Position = 0
         )]
-        [ValidateSet('AllServices', 'AzureAD', 'ComplianceCenter', 'ExchangeOnline', 'MSOnline', 'SharepointOnline' ,'SkypeforBusinessOnline')]
+        [ValidateSet('AllServices', 'AzureAD', 'ComplianceCenter', 'ExchangeOnline', 'ExchangeOnlineProtection', 'MSOnline', 'SharepointOnline' ,'SkypeforBusinessOnline')]
         [ValidateNotNullOrEmpty()]
         [string[]]$Service = @('AzureAD','MSOnline')
     )
@@ -119,7 +120,8 @@
     }
     begin {
 
-        if (($service = $Service | Sort-Object -Unique).Count -gt 5 -or $Service -eq 'All') {
+        # Sorting all input strings from the Service parameter.
+        if (($Service = $Service | Sort-Object -Unique).Count -gt 6 -or $Service -eq 'All') {
             $Service = 'AllServices'
         }        
     }
@@ -153,6 +155,10 @@
                         Write-Verbose -Message 'Conncting to Exchange Online.' -Verbose
                         Connect-ExchangeOnline
                     }
+                    'ExchangeOnlineProtection' {
+                        Write-Verbose -Message 'Conncting to Exchange Online Protection.' -Verbose
+                        Connect-ExchangeOnlineProt
+                    }
                     'SharepointOnline' {
                         Write-Verbose -Message 'Conncting to Sharepoint Online.' -Verbose
                         Connect-SPOnline -SharepointDomain $PSBoundParameters['SharepointDomain']
@@ -167,6 +173,7 @@
                         Connect-MsolServiceOnline
                         Connect-CCOnline
                         Connect-ExchangeOnline
+                        Connect-ExchangeOnlineProt
                         Connect-SPOnline -SharepointDomain $PSBoundParameters['SharepointDomain']
                         Connect-SfBOnline
                     }
