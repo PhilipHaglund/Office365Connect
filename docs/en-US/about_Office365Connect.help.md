@@ -1,58 +1,35 @@
 # Office365Connect
 ## about_Office365Connect
 
-```
-ABOUT TOPIC NOTE:
-The first header of the about topic should be the topic name.
-The second header contains the lookup name used by the help system.
-
-IE:
-# Some Help Topic Name
-## SomeHelpTopicFileName
-
-This will be transformed into the text file
-as `about_SomeHelpTopicFileName`.
-Do not include file extensions.
-The second header should have no spaces.
-```
-
 # SHORT DESCRIPTION
-{{ Short Description Placeholder }}
-
-```
-ABOUT TOPIC NOTE:
-About topics can be no longer than 80 characters wide when rendered to text.
-Any topics greater than 80 characters will be automatically wrapped.
-The generated about topic will be encoded UTF-8.
-```
+Office365Connect is Powershell Module with two functions to connect and disconnect to all Office 365 services that offers a Powershell-way to connect.
 
 # LONG DESCRIPTION
-{{ Long Description Placeholder }}
+Connect to one or more Office 365 services using the module function `Connect-Office365`.
 
-## Optional Subtopics
-{{ Optional Subtopic Placeholder }}
+![Connect-Office365](https://raw.githubusercontent.com/PhilipHaglund/Office365Connect/dev/docs/pics/Connect-Office365_1.png)
 
-# EXAMPLES
-{{ Code or descriptive examples of how to leverage the functions described. }}
+![Get-AzureADUser](https://raw.githubusercontent.com/PhilipHaglund/Office365Connect/dev/docs/pics/Connect-Office365_2.png)
 
-# NOTE
-{{ Note Placeholder - Additional information that a user needs to know.}}
+Some Office 365 requires a separate module for binarie to be installed:
 
-# TROUBLESHOOTING NOTE
-{{ Troubleshooting Placeholder - Warns users of bugs}}
+- **AzureAD** requires a separate module - https://www.powershellgallery.com/packages/AzureAD/ or cmdlet `Install-Module -Name AzureAD`.
+- **MsolService** requires a separate module - http://go.microsoft.com/fwlink/?linkid=236297.
+- **Sharepoint Online** requires a separate module - https://www.microsoft.com/en-us/download/details.aspx?id=35588
+- **Skype for Business Online** requires a separate module - https://www.microsoft.com/en-us/download/details.aspx?id=39366
 
-{{ Explains behavior that is likely to change with fixes }}
+**Exchange Online**, **Exchange Online Protection**, **Complince Center** does not require seperate binaries. These services uses the built in [PowerShell remote cmdlets](https://technet.microsoft.com/en-us/library/jj984289(v=exchg.160).aspx? "PowerShell remote cmdlets").
+
+*Notice: The links above targeting the modules and binaries may change, please enlight me with an issue if you discover a change.*
+
+
+To disconnect from one or more Office 365 services instead of closing the PowerShell session (console) is done with the function `Disconnect-Office365`.
+
+![](https://raw.githubusercontent.com/PhilipHaglund/Office365Connect/dev/docs/pics/Disconnect-Office365_1.png)
+
+
+
 
 # SEE ALSO
-{{ See also placeholder }}
-
-{{ You can also list related articles, blogs, and video URLs. }}
-
-# KEYWORDS
-{{List alternate names or titles for this topic that readers might use.}}
-
-- {{ Keyword Placeholder }}
-- {{ Keyword Placeholder }}
-- {{ Keyword Placeholder }}
-- {{ Keyword Placeholder }}
-
+- [https://github.com/PhilipHaglund/Office365Connect](https://github.com/PhilipHaglund/Office365Connect "https://github.com/PhilipHaglund/Office365Connect")
+- [https://www.powershellgallery.com/packages/Office365Connect](https://www.powershellgallery.com/packages/Office365Connect "https://www.powershellgallery.com/packages/Office365Connect")
