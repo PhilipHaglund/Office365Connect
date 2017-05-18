@@ -141,7 +141,7 @@
             if ($Credential -eq $false) {
 
                 Write-Warning -Message 'Need valid credentials to connect, please provide the correct credentials.'
-                exit
+                break
             }    
         }
     }
