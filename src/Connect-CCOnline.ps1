@@ -29,7 +29,7 @@
 
     try {
 
-        $null = New-PSSession -ConfigurationName 'Microsoft.Exchange' `                -Name 'CCOOnline' `                -ConnectionUri 'https://ps.compliance.protection.outlook.com/powershell-liveid/' `                -Credential $Credential `                -Authentication Basic `
+        $null = New-PSSession -ConfigurationName 'Microsoft.Exchange' `                -Name 'CCOnline' `                -ConnectionUri 'https://ps.compliance.protection.outlook.com/powershell-liveid/' `                -Credential $Credential `                -Authentication Basic `
                 -AllowRedirection:$true `                -ErrorAction Stop `
                 -WarningAction SilentlyContinue `
                 -Verbose:$false

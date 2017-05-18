@@ -5,7 +5,7 @@
 
     try {
     
-        Get-PSSession -ErrorAction Stop | Get-OnlinePSSession -FilterComputerName outlook.office365.com -FilterConfigurationName Microsoft.Exchange
+        Get-PSSession -ErrorAction Stop | Get-OnlinePSSession -FilterComputerName outlook.office365.com -FilterConfigurationName Microsoft.Exchange -FilterSessionName 'ExchangeOnline'
     }
     catch {
     

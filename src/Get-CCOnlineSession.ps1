@@ -5,7 +5,7 @@
 
     try {
 
-        Get-PSSession -ErrorAction Stop | Get-OnlinePSSession -FilterComputerName Compliance -FilterConfigurationName Microsoft.Exchange
+        Get-PSSession -ErrorAction Stop | Get-OnlinePSSession -FilterComputerName Compliance -FilterConfigurationName Microsoft.Exchange -FilterSessionName CCOnline
     }
     catch {
 

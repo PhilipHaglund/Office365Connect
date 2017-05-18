@@ -5,7 +5,7 @@
 
     try {
     
-        Get-PSSession -ErrorAction Stop | Get-OnlinePSSession -FilterComputerName protection -FilterConfigurationName Microsoft.Exchange
+        Get-PSSession -ErrorAction Stop | Get-OnlinePSSession -FilterComputerName 'protection' -FilterConfigurationName 'Microsoft.Exchange' -FilterSessionName 'ExchangeOnlineProt'
     }
     catch {
     
