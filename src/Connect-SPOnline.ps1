@@ -30,7 +30,7 @@
 
         try {
 
-            Import-Module -Name 'Microsoft.Online.SharePoint.PowerShell' -DisableNameChecking -ErrorAction Stop -WarningAction SilentlyContinue
+            Import-Module -Name 'Microsoft.Online.SharePoint.PowerShell' -DisableNameChecking -ErrorAction Stop -WarningAction SilentlyContinue -Verbose:$false
         }
         catch {
 
@@ -40,7 +40,8 @@
 
         try {
               
-            $null = Connect-SPOService -Url ('https://{0}-admin.sharepoint.com' -f ($SharepointDomain)) `                    -Credential $Credential `                    -ErrorAction Stop `                    -WarningAction SilentlyContinue
+            $null = Connect-SPOService -Url ('https://{0}-admin.sharepoint.com' -f ($SharepointDomain)) `                    -Credential $Credential `                    -ErrorAction Stop `                    -WarningAction SilentlyContinue `
+                    -Verbose:$false
         }
         catch {
 

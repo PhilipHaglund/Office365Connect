@@ -29,7 +29,8 @@
 
     try {
 
-        $null = New-PSSession -ConfigurationName Microsoft.Exchange `                -Name 'ExchangeOnline' `                -ConnectionUri 'https://outlook.office365.com/powershell-liveid/' `                -Credential $Credential `                -Authentication Basic `                -AllowRedirection `                -ErrorAction Stop `                -WarningAction SilentlyContinue
+        $null = New-PSSession -ConfigurationName Microsoft.Exchange `                -Name 'ExchangeOnline' `                -ConnectionUri 'https://outlook.office365.com/powershell-liveid/' `                -Credential $Credential `                -Authentication Basic `                -AllowRedirection `                -ErrorAction Stop `                -WarningAction SilentlyContinue `
+                -Verbose:$false
     }
     catch {
 
@@ -39,7 +40,8 @@
 
     try {
 
-        $null = Import-Module `                (Import-PSSession -Session (Get-ExchangeOnlineSession) -DisableNameChecking -AllowClobber -ErrorAction Stop -WarningAction SilentlyContinue) `                -DisableNameChecking `                -Global `                -ErrorAction Stop `                -WarningAction SilentlyContinue
+        $null = Import-Module `                (Import-PSSession -Session (Get-ExchangeOnlineSession) -DisableNameChecking -AllowClobber -ErrorAction Stop -WarningAction SilentlyContinue -Verbose:$false) `                -DisableNameChecking `                -Global `                -ErrorAction Stop `                -WarningAction SilentlyContinue `
+                -Verbose:$false
     }
     catch {
 

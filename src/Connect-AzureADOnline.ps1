@@ -24,7 +24,7 @@
 
         try {
 
-            Import-Module -Name 'AzureAD' -DisableNameChecking -ErrorAction Stop -WarningAction SilentlyContinue
+            Import-Module -Name 'AzureAD' -DisableNameChecking -ErrorAction Stop -WarningAction SilentlyContinue -Verbose:$false
         }
         catch {
 
@@ -34,7 +34,7 @@
 
         try {
 
-            $null = Connect-AzureAD -Credential $Credential -ErrorAction Stop -WarningAction SilentlyContinue
+            $null = Connect-AzureAD -Credential $Credential -ErrorAction Stop -WarningAction SilentlyContinue -Verbose:$false
         }
         catch {
 

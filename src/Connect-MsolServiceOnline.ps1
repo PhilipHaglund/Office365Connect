@@ -24,7 +24,7 @@
 
         try {
 
-            Import-Module -Name 'MSOnline' -DisableNameChecking -ErrorAction Stop -WarningAction SilentlyContinue
+            Import-Module -Name 'MSOnline' -DisableNameChecking -ErrorAction Stop -WarningAction SilentlyContinue -Verbose:$false
         }
         catch {
 

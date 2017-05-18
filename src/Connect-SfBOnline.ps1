@@ -30,7 +30,7 @@
         }
         try {
 
-            Import-Module -Name 'SkypeOnlineConnector' -DisableNameChecking -ErrorAction Stop -WarningAction SilentlyContinue
+            Import-Module -Name 'SkypeOnlineConnector' -DisableNameChecking -ErrorAction Stop -WarningAction SilentlyContinue -Verbose:$false
         }
         catch {
 
@@ -40,7 +40,7 @@
 
         try {
 
-            $null = New-CsOnlineSession -Credential $Credential -ErrorAction Stop -WarningAction SilentlyContinue
+            $null = New-CsOnlineSession -Credential $Credential -ErrorAction Stop -WarningAction SilentlyContinue -Verbose:$false
         }
         catch {
 
@@ -49,7 +49,7 @@
         }
         try {
 
-            $null = Import-PSSession -Session (Get-SfBOnlineSession) -DisableNameChecking -AllowClobber -ErrorAction Stop -WarningAction SilentlyContinue
+            $null = Import-PSSession -Session (Get-SfBOnlineSession) -DisableNameChecking -AllowClobber -ErrorAction Stop -WarningAction SilentlyContinue -Verbose:$false
         }
         catch {
 

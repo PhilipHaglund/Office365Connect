@@ -31,7 +31,8 @@
 
         $null = New-PSSession -ConfigurationName 'Microsoft.Exchange' `                -Name 'CCOOnline' `                -ConnectionUri 'https://ps.compliance.protection.outlook.com/powershell-liveid/' `                -Credential $Credential `                -Authentication Basic `
                 -AllowRedirection:$true `                -ErrorAction Stop `
-                -WarningAction SilentlyContinue
+                -WarningAction SilentlyContinue `
+                -Verbose:$false
     }
     catch {
 
@@ -41,10 +42,10 @@
 
     try {
 
-        $null = Import-Module `                (Import-PSSession -Session (Get-CCOnlineSession) -DisableNameChecking -AllowClobber -ErrorAction Stop -WarningAction SilentlyContinue) `
+        $null = Import-Module `                (Import-PSSession -Session (Get-CCOnlineSession) -DisableNameChecking -AllowClobber -ErrorAction Stop -WarningAction SilentlyContinue -Verbose:$false) `
                 -DisableNameChecking `
                 -Global `
-                -ErrorAction Stop `                -WarningAction SilentlyContinue
+                -ErrorAction Stop `                -WarningAction SilentlyContinue `                -Verbose:$false
     }
     catch {
 
