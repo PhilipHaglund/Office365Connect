@@ -44,16 +44,16 @@ PrivateData = @{
         Tags = 'AzureAD', 'Office365', 'Connect', 'Msol', 'ExchangeOnline', 'Online'
 
         # A URL to the license for this module.
-        LicenseUri = 'https://github.com/PhilipHaglund/PowerShell/blob/master/Office365Connect/LICENSE.txt'
+        LicenseUri = 'https://github.com/PhilipHaglund/Office365Connect/blob/master/LICENSE.txt'
 
         # A URL to the main website for this project.
-        ProjectUri = 'https://github.com/PhilipHaglund/PowerShell/tree/master/Office365Connect'
+        ProjectUri = 'https://github.com/PhilipHaglund/Office365Connect'
 
         # A URL to an icon representing this module.
-        IconUri = 'https://raw.githubusercontent.com/PhilipHaglund/PowerShell/master/Office365Connect/docs/pics/Office365Connect.jpg'
+        IconUri = 'https://raw.githubusercontent.com/PhilipHaglund/Office365Connect/tree/master/docs/pics/Office365Connect.jpg'
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'https://github.com/PhilipHaglund/PowerShell/blob/master/Office365Connect/ReleaseNotes.md'
+        ReleaseNotes = 'https://github.com/PhilipHaglund/Office365Connect/blob/master/ReleaseNotes.md'
 
         # Indicates this is a pre-release/testing version of the module.
         IsPrerelease = 'False'
@@ -63,8 +63,7 @@ PrivateData = @{
 } # End of PrivateData hashtable
 
 # HelpInfo URI of this module
-HelpInfoURI = 'https://github.com/PhilipHaglund/PowerShell/master/Office365Connect/docs/about_Office365Connect.help.md'
-
+HelpInfoURI = 'https://github.com/PhilipHaglund/Office365Connect/tree/master/docs/en-US/about_Office365Connect.help.md'
 }
 
 
