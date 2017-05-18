@@ -18,16 +18,21 @@ page.
 
 ## Documentation
 
-You can learn how to use Plaster and write your own templates by reading the documentation:
+You can learn how to use Office365 by reading the documentation:
 
 - [About Office365Connect](docs/en-US/about_Office365Connect.help.md)
-- [Cmdlet Documentation](docs/en-US/Plaster.md)
+- [Cmdlet Documentation](docs/en-US/Office365Connect.md)
 
 
 ## Maintainers
 
 - [Philip Haglund](https://github.com/PhilipHaglund) - [@KPHaglund](https://twitter.com/KPHaglund)
 - You?
+
+
+## Contiribute
+
+- I welcome contributions, issues and forks!
 
 ## License
 
