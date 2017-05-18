@@ -1,8 +1,8 @@
 ---
-external help file: Office365Connect-help.xml
-online version: https://github.com/PhilipHaglund/Office365Connect/
-https://gonjer.com/
-schema: 2.0.0
+Function Name: Connect-Office365
+Download Help Link: https://github.com/PhilipHaglund/Office365Connect/blob/master/docs/en-US/Disconnect-Office365.md
+Help Version: 1.0.0
+Locale: en-US
 ---
 
 # Disconnect-Office365
