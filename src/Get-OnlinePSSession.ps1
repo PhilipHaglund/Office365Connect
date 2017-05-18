@@ -20,12 +20,15 @@
             HelpMessage = 'Provide a ConfiguratioName for a PSSession for filter usage.'
         )]
         [ValidateNotNullOrEmpty()]
-        [string]$FilterConfigurationName
+        [string]$FilterConfigurationName,
+
+        [ValidateNotNullOrEmpty()]
+        [string]$FilterSessionName = '.'
     )
 
     process {
 
-        if ($Session.ComputerName -match $FilterComputerName -and $Session.ConfigurationName -eq $FilterConfigurationName) {
+        if ($Session.ComputerName -match $FilterComputerName -and $Session.ConfigurationName -eq $FilterConfigurationName -and $Session.Name -match $FilterSessionName) {
             $Session
         }
     }

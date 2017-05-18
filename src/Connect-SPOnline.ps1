@@ -10,11 +10,12 @@
         [string]$SharepointDomain,
 
         [Parameter(
+            ValueFromPipeline = $true,
             Mandatory = $true,
             HelpMessage = 'Credentials in Azure AD to access Office 365.'
         )]
         [System.Management.Automation.Credential()]
-        [pscredential]$Credential
+        [PSCredential]$Credential
     )
 
     $Module = Get-Module -Name 'Microsoft.Online.SharePoint.PowerShell' -ListAvailable

@@ -4,11 +4,12 @@
     param(
 
         [Parameter(
+            ValueFromPipeline = $true,
             Mandatory = $true,
             HelpMessage = 'Credentials in Azure AD to access Office 365.'
         )]
         [System.Management.Automation.Credential()]
-        [pscredential]$Credential
+        [PSCredential]$Credential
     )
 
     if ($null -ne (Get-CCOnlineSession)) {
@@ -19,11 +20,16 @@
             Write-Verbose -Message 'Disconnect from the current session to start a new one.'
             return
         }
+        else
+        {
+            Write-Warning -Message 'Compliance Center Online is not available on the target Office 365 tenant'
+            return
+        }
     }
 
     try {
 
-        $null = New-PSSession -ConfigurationName 'Microsoft.Exchange' `                -ConnectionUri 'https://ps.compliance.protection.outlook.com/powershell-liveid/' `                -Credential $Credential `                -Authentication Basic `
+        $null = New-PSSession -ConfigurationName 'Microsoft.Exchange' `                -Name 'CCOOnline' `                -ConnectionUri 'https://ps.compliance.protection.outlook.com/powershell-liveid/' `                -Credential $Credential `                -Authentication Basic `
                 -AllowRedirection:$true `                -ErrorAction Stop `
                 -WarningAction SilentlyContinue
     }

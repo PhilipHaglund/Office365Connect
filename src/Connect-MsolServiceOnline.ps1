@@ -4,11 +4,12 @@
     param(        
         
         [Parameter(
+            ValueFromPipeline = $true,
             Mandatory = $true,
             HelpMessage = 'Credentials in Azure AD to access Office 365.'
         )]
         [System.Management.Automation.Credential()]
-        [pscredential]$Credential
+        [PSCredential]$Credential
     )
 
     $Module = Get-Module -Name 'MSOnline' -ListAvailable
@@ -36,9 +37,25 @@
             Connect-MsolService -Credential $Credential -ErrorAction Stop -WarningAction SilentlyContinue
         }
         catch {
+            # If Connect-MsolService fails. First fail, try to remove Cookies. Second fail, try to restart Microsoft Online Services Sign-in Assistant
+            try {
 
-            Write-Warning -Message ('Unable to connect to MSOnline - {0}' -f $_.Exception.Message)
-            return
+                Disconnect-MsolServiceOnline -CoockiesOnly
+                Connect-MsolService -Credential $Credential -ErrorAction Stop -WarningAction SilentlyContinue
+            }
+            catch {
+                
+                try {
+
+                    Restart-Service -Name 'msoidsvc' -ErrorAction Stop
+                    Connect-MsolService -Credential $Credential -ErrorAction Stop -WarningAction SilentlyContinue
+                }
+                catch {
+
+                    Write-Warning -Message ('Unable to connect to MSOnline - {0}' -f $_.Exception.Message)
+                    return
+                }
+            }
         }
     }
 }

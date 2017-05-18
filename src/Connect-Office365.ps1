@@ -93,19 +93,19 @@
 
         if ($Service -match 'AllServices|SharepointOnline') {
 
-            # Create a ParameterAttribute Object
+            # Create a Parameter Attribute Object
             $SPAttrib = New-Object -TypeName System.Management.Automation.ParameterAttribute
             $SPAttrib.Position = 1
             $SPAttrib.Mandatory = $true            
             $SPAttrib.HelpMessage = 'Enter a valid Sharepoint Online Domain. Example: "Contoso"'
             
-            # Create an AliasAttribute Object for the parameter
+            # Create an Alias Attribute Object for the parameter
             $SPAlias = New-Object -TypeName System.Management.Automation.AliasAttribute -ArgumentList @('Domain','DomainHost','Customer')
 
             # Create an AttributeCollection Object
             $SPCollection = New-Object -TypeName System.Collections.ObjectModel.Collection[System.Attribute]
                        
-            # Add the attributes to the AttributeCollection
+            # Add the attributes and aliases to the Attribute Collection
             $SPCollection.Add($SPAttrib)
             $SPCollection.Add($SPAlias)
             
@@ -119,12 +119,21 @@
         }
     }
     begin {
+        
+        $EOPExclusive = 'Will not use Exchange Online Protection. EOP and EO are mutually exclusive.'
 
         # Sorting all input strings from the Service parameter.
-        if (($Service = $Service | Sort-Object -Unique).Count -gt 6 -or $Service -eq 'All') {
+        if (([Collections.ArrayList]$Service = @($Service | Sort-Object -Unique)).Count -gt 6 -or $Service -match 'AllServices') {
             $Service = 'AllServices'
+            Write-Verbose -Message $EOPExclusive
         }
         
+        if ($Service -match 'ExchangeOnline' -and $Service -match  'ExchangeOnlineProtection')
+        {
+            Write-Verbose -Message $EOPExclusive
+            $Service.Remove('ExchangeOnlineProtection')
+        }
+
         if ($PSCmdlet.ShouldProcess('UserPrincipalName in Azure AD to access Office 365', 'Get-AzureADCredential')) {
 
             $Credential = Get-AzureADCredential
@@ -139,48 +148,47 @@
     process {
 
         foreach ($s in $Service) {
-            $Credential.GetNetworkCredential()
+            
             if ($PSCmdlet.ShouldProcess('Establishing a PowerShell session to {0} - Office 365.' -f ('{0}' -f $s), $MyInvocation.MyCommand.Name)) {
                 
                 switch ($s) {
 
                     'AzureAD' {
                         Write-Verbose -Message 'Conncting to AzureAD.' -Verbose
-                        Connect-AzureADOnline -Credential $Credential
+                        $Credential | Connect-AzureADOnline
                     }
                     'MSOnline' {
                         Write-Verbose -Message 'Conncting to MSolService.' -Verbose
-                        Connect-MsolServiceOnline -Credential $Credential
+                        $Credential | Connect-MsolServiceOnline
                     }
                     'ComplianceCenter' {
                         Write-Verbose -Message 'Conncting to Compliance Center.' -Verbose
-                        Connect-CCOnline -Credential $Credential
+                        $Credential | Connect-CCOnline
                     }
                     'ExchangeOnline' {
                         Write-Verbose -Message 'Conncting to Exchange Online.' -Verbose
-                        Connect-ExchangeOnline -Credential $Credential
+                        $Credential | Connect-ExchangeOnline
                     }
                     'ExchangeOnlineProtection' {
                         Write-Verbose -Message 'Conncting to Exchange Online Protection.' -Verbose
-                        Connect-ExchangeOnlineProt -Credential $Credential
+                        $Credential | Connect-ExchangeOnlineProt
                     }
                     'SharepointOnline' {
                         Write-Verbose -Message 'Conncting to Sharepoint Online.' -Verbose
-                        Connect-SPOnline -SharepointDomain $PSBoundParameters['SharepointDomain'] -Credential $Credential
+                        $Credential | Connect-SPOnline -SharepointDomain $PSBoundParameters['SharepointDomain']
                     }
                     'SkypeforBusinessOnline' {
                         Write-Verbose -Message 'Conncting to Skype for Business Online.' -Verbose
-                        Connect-SfBOnline -Credential $Credential
+                        $Credential | Connect-SfBOnline
                     }
                     Default {
                         Write-Verbose -Message 'Connecting to all Office 365 Services.' -Verbose
-                        Connect-AzureADOnline -Credential $Credential
-                        Connect-MsolServiceOnline -Credential $Credential
-                        Connect-CCOnline -Credential $Credential
-                        Connect-ExchangeOnline -Credential $Credential
-                        Connect-ExchangeOnlineProt -Credential $Credential
-                        Connect-SPOnline -SharepointDomain $PSBoundParameters['SharepointDomain'] -Credential $Credential
-                        Connect-SfBOnline -Credential $Credential
+                        $Credential | Connect-AzureADOnline
+                        $Credential | Connect-MsolServiceOnline
+                        $Credential | Connect-CCOnline
+                        $Credential | Connect-ExchangeOnline
+                        $Credential | Connect-SPOnline -SharepointDomain $PSBoundParameters['SharepointDomain']
+                        $Credential | Connect-SfBOnline
                     }
                 }
             }

@@ -16,19 +16,19 @@
         
             $AzureADCredential = Get-Credential -Message 'UserPrincipalName in Azure AD to access Office 365.'
             
-            if ($AzureADCredential -match $Regex) {
+            if ($AzureADCredential.UserName -match $Regex) {
                 
-                Write-Verbose -Message 'Credential match'
-                return $AzureADCredential
+                Write-Verbose -Message 'Credential match the regex.'
+                $AzureADCredential
+                break
             }
             if ($Counter -lt $MaxTry) {
         
-                Write-Verbose -Message 'Credentials does not match a valid UserPrincipalName in AzureAD, please provide a corrent UserPrincipalName.' -Verbose
-                Write-Verbose -Message ('Try {0} of {1}' -f $Counter, $MaxTry) -Verbose
+                Write-Warning -Message 'Credentials does not match a valid UserPrincipalName in AzureAD, please provide a corrent UserPrincipalName.'
+                Write-Warning -Message ('Try {0} of {1}' -f ($Counter + 1), $MaxTry)
             }
             elseif ($Counter -ge $MaxTry) {
                 
-                Write-Verbose -Message ('Try {0} of {1}' -f $Counter, $MaxTry) -Verbose
                 Write-Error -Message 'Credentials does not match a UserPrincipalName in AzureAD' -Exception 'System.Management.Automation.SetValueException' -Category InvalidResult -ErrorAction Stop
                 break
             }
