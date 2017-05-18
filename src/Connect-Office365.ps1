@@ -122,8 +122,8 @@
         
         $EOPExclusive = 'Will not use Exchange Online Protection. EOP and EO are mutually exclusive.'
 
-        # Sorting all input strings from the Service parameter.
-        if (([Collections.ArrayList]$Service = @($Service | Sort-Object -Unique)).Count -gt 6 -or $Service -match 'AllServices') {
+        # Sorting all input strings from the Service parameter to avoid duplicates.
+        if (([Collections.ArrayList]@($Service = $Service | Sort-Object -Unique)).Count -gt 6 -or $Service -match 'AllServices') {
             $Service = 'AllServices'
             Write-Verbose -Message $EOPExclusive
         }

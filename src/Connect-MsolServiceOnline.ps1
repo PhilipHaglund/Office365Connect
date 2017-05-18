@@ -46,9 +46,19 @@
             catch {
                 
                 try {
-
-                    Restart-Service -Name 'msoidsvc' -ErrorAction Stop
-                    Connect-MsolService -Credential $Credential -ErrorAction Stop -WarningAction SilentlyContinue
+                    
+                    $User = [Security.Principal.WindowsIdentity]::GetCurrent()
+                    if ((New-Object Security.Principal.WindowsPrincipal $User).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)) {
+                    
+                        Write-Verbose -Message 'Restarting "Microsoft Online Services Sign-in Assistant" to avoid saved sessions.'
+                        Restart-Service -Name 'msoidsvc' -ErrorAction Stop
+                        Connect-MsolService -Credential $Credential -ErrorAction Stop -WarningAction SilentlyContinue
+                    }
+                    else {
+                        
+                        Write-Warning -Message 'Unable to restart service "Microsoft Online Services Sign-in Assistant". Administrator privileges is required for this.'
+                        return
+                    }
                 }
                 catch {
 
