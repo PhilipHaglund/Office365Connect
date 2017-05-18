@@ -7,6 +7,10 @@ Office365Connect is Powershell Module with two functions to connect and disconne
 # LONG DESCRIPTION
 Connect to one or more Office 365 services using the module function `Connect-Office365`.
 
+![Connect-Office365](https://raw.githubusercontent.com/PhilipHaglund/Office365Connect/dev/docs/pics/Connect-Office365_1.png)
+
+![Get-AzureADUser](https://raw.githubusercontent.com/PhilipHaglund/Office365Connect/dev/docs/pics/Connect-Office365_2.png)
+
 Some Office 365 requires a separate module for binarie to be installed:
 
 - **AzureAD** requires a separate module - https://www.powershellgallery.com/packages/AzureAD/ or cmdlet `Install-Module -Name AzureAD`.
@@ -20,6 +24,8 @@ Some Office 365 requires a separate module for binarie to be installed:
 
 
 To disconnect from one or more Office 365 services instead of closing the PowerShell session (console) is done with the function `Disconnect-Office365`.
+
+![](https://raw.githubusercontent.com/PhilipHaglund/Office365Connect/dev/docs/pics/Disconnect-Office365_1.png)
 
 
 
