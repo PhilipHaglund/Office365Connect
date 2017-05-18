@@ -1,5 +1,5 @@
 ---
-Function Name: Connect-Office365
+Function Name: Disconnect-Office365
 Download Help Link: https://github.com/PhilipHaglund/Office365Connect/blob/master/docs/en-US/Disconnect-Office365.md
 Help Version: 1.0.0
 Locale: en-US
