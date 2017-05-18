@@ -27,7 +27,7 @@ CompanyName = 'Gonjer.com'
 Copyright = '(c) 2017 Philip Haglund. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'Powershell Module with two functions to connect and disconnect to all Office 365 services.'
+Description = 'Office365Connect is a module to connect to all Office 365 services that offer a way in with PowerShell.'
 
 # Minimum version of the Windows PowerShell engine required by this module
 PowerShellVersion = '3.0'

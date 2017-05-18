@@ -8,6 +8,7 @@ May 18, 2017
 - Use a own repository instead of my general PowerShell [repository](https://github.com/PhilipHaglund/PowerShell "repository").
 - New module version order using 3 numbers (1.5.0) instead of four (1.0.1.1).
 - Add `Exchange Online Protection` as an available service to connect to.
+- Fixed some bugs with cached credentials.
 
 
 

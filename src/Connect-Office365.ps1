@@ -4,7 +4,8 @@
         Connect to one or more Office 365 services using Powershell.
         
         .DESCRIPTION
-        Connect to one or more Office 365 (AzureAD) services using Powershell. Some services requires the installation of separate PowerShell modules or binaries.
+        Connect to one or more Office 365 services using Powershell and a Azure AD account.
+        Some services requires the installation of separate PowerShell modules or binaries:
         AzureAD requires a separate module - https://www.powershellgallery.com/packages/AzureAD/ or cmdlet "Install-Module -Name AzureAD"
         MsolService requires a separate module - http://go.microsoft.com/fwlink/?linkid=236297
         Sharepoint Online requires a separate module - https://www.microsoft.com/en-us/download/details.aspx?id=35588
@@ -62,24 +63,19 @@
         The parameter SharepointDomain is explicit provided to avoid the mandatory parameter prompt.
 
 
-        .NOTES
-        Created on:     2017-02-23 14:56
-        Created by:     Philip Haglund
-        Organization:   Gonjer.com
-        Version:        1.5.0
-        Requirements:   Powershell 3.0
-
         .LINK
         https://github.com/PhilipHaglund/Office365Connect/
         https://gonjer.com/
     #>
     [CmdletBinding(
         SupportsShouldProcess = $true
-    )]    
+    )]
     param(
-        # Provide one or more Office 365 services to connect to.
-        # Valid values are:
-        # 'AllServices', 'AzureAD', 'ComplianceCenter', 'ExchangeOnline', 'ExchangeOnlineProtection', 'MSOnline', 'SharepointOnline' ,'SkypeforBusinessOnline'
+        <#
+        Provide one or more Office 365 services to connect to.
+        Valid values are:
+        'AllServices', 'AzureAD', 'ComplianceCenter', 'ExchangeOnline', 'ExchangeOnlineProtection', 'MSOnline', 'SharepointOnline' ,'SkypeforBusinessOnline'
+        #>
         [Parameter(
             ValueFromPipeline = $true,
             Position = 0

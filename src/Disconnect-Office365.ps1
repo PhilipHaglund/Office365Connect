@@ -4,7 +4,8 @@
         Disconnect from one or more Office 365 services using Powershell.
         
         .DESCRIPTION
-        Disconnect from one or more Office 365 (AzureAD) services using Powershell. Some services requires the installation of separate PowerShell modules or binaires.
+        Disconnect from one or more Office 365 services using Powershell.
+        Some services requires the installation of separate PowerShell modules or binaires:
         AzureAD requires a separate module - https://www.powershellgallery.com/packages/AzureAD/ or cmdlet "Install-Module -Name AzureAD"
         MsolService requraes a seprate module - http://go.microsoft.com/fwlink/?linkid=236297
         Sharepoint Online requires a separate module - https://www.microsoft.com/en-us/download/details.aspx?id=35588
@@ -16,13 +17,6 @@
         
 
         VERBOSE: Disconnecting from all Office 365 Services.
-        VERBOSE: Azure AD Session is now closed.
-        VERBOSE: MsolService Module is now closed.
-        VERBOSE: The Compliance Center Online PSSession is now closed.
-        VERBOSE: The Exchange Online PSSession is now closed.
-        VERBOSE: The Exchange Online Protection PSSession is now closed.
-        VERBOSE: The Sharepoint Online Session is now closed.
-        VERBOSE: The Skype for Business Online PSSession is now closed.
 
         This command disconnects from all Office 365 service sessions that are available and running.
 
@@ -38,13 +32,6 @@
         VERBOSE: The Exchange Online PSSession is now closed.
 
         This command disconnects from AzureAD, Compliance Center and Exchange Online service sessions that are available and running.
-
-        .NOTES
-        Created on:     2017-02-23 14:56
-        Created by:     Philip Haglund
-        Organization:   Gonjer.com        
-        Version:        1.5.0
-        Requirements:   Powershell 3.0       
 
         .LINK
         https://github.com/PhilipHaglund/Office365Connect/
