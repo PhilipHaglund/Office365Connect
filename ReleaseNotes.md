@@ -1,4 +1,4 @@
-## What is New in Plaster 1.5.0
+## What is New in Office365Connect 1.5.0
 May 18, 2017
 
 - Complete refactor and restructure of the module and its functions.
